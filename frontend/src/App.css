@@ -1,0 +1,183 @@
+/* ── Google Font ── */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #f0f4f8;
+  color: #1e2d3d;
+  min-height: 100vh;
+}
+
+/* ── Page formulaire ── */
+.f-page {
+  max-width: 560px;
+  margin: 40px auto;
+  padding: 0 16px;
+  animation: f-up .45s ease both;
+}
+
+@keyframes f-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── En-tête ── */
+.f-header { margin-bottom: 24px; }
+
+.f-pill {
+  display: inline-block;
+  background: #1565c0;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+
+.f-title { font-size: 22px; font-weight: 700; color: #1e2d3d; }
+
+.f-sub { font-size: 13px; color: #607080; margin-top: 4px; }
+
+/* ── Carte principale ── */
+.f-card {
+  background: #fff;
+  border: 1px solid #d4dde8;
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.f-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1565c0, #42a5f5);
+}
+
+/* ── Labels de section ── */
+.f-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #90a4b4;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── Grille 2 colonnes ── */
+.f-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* ── Champ ── */
+.f-field { display: flex; flex-direction: column; gap: 5px; }
+
+.f-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #455a6a;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.f-field input {
+  background: #f7f9fc;
+  border: 1.5px solid #d4dde8;
+  border-radius: 10px;
+  padding: 11px 13px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: #1e2d3d;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+
+.f-field input::placeholder { color: #b0bec5; }
+
+.f-field input:focus {
+  border-color: #1565c0;
+  box-shadow: 0 0 0 3px #1565c018;
+  background: #fff;
+}
+
+/* ── Prestation calculée ── */
+.f-prestation {
+  background: #e8f1fc;
+  border: 1.5px solid #90caf9;
+  border-radius: 10px;
+  padding: 11px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.f-prestation span { font-size: 12px; color: #5b8fc9; font-weight: 500; }
+.f-prestation strong { color: #1565c0; font-weight: 700; }
+
+/* ── Bouton ── */
+.f-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: none;
+  background: #1565c0;
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+}
+
+.f-btn:hover { background: #1976d2; }
+.f-btn:active { transform: scale(.98); }
+
+/* ── Messages retour ── */
+.f-msg {
+  margin-top: 16px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  animation: f-fadein .3s ease;
+}
+
+@keyframes f-fadein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.f-msg--success { background: #e8f5e9; border: 1.5px solid #a5d6a7; color: #2e7d32; }
+.f-msg--error   { background: #fce4ec; border: 1.5px solid #f48fb1; color: #c62828; }
+
+.f-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.f-msg--success .f-dot { background: #43a047; }
+.f-msg--error   .f-dot { background: #e53935; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .f-grid { grid-template-columns: 1fr; }
+  .f-card { padding: 24px 18px; }
+}
