@@ -1,22 +1,27 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = 5000;
 
-app.get('/', (req, res) => {
-    res.send('Serveur opérationnel !');
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+app.use(express.json());
+
+//IMPORT ROUTES
+const bilanRoutes = require("./Routes/bilanRoutes");
+const enseignantRoutes = require("./Routes/enseignantRoutes");
+
+//UTILISATION ROUTES
+app.use("/api/bilan", bilanRoutes);
+app.use("/api/enseignant", enseignantRoutes); //implique que l'url sera  http://localhost:5000/api/enseignant
+
+app.get("/", (req, res) => {
+  res.send("Serveur Backend opérationnel");
 });
 
-app.listen(PORT, () => {
-    console.log(`Le serveur tourne sur http://localhost:${PORT}`);
-});
-
-const pool = require('./db');
-
-app.get('/test-db', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
+app.listen(5000, () => {
+  console.log("Serveur lancé sur http://localhost:5000");
 });

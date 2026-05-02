@@ -1,121 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useEffect, useState } from "react";
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import EnseignantPage from "./Pages/EnseignantPage";
+import FormulairePage from "./Pages/FormulairePage";
+import HomePage from "./Pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+
+// Placeholders simplifiés pour le test
+const AjoutPage = () => <div className="page-container"><h2>Ajouter un enseignant</h2><p>En développement</p></div>;
+const SuppressionPage = () => <div className="page-container"><h2>Supprimer un enseignant</h2><p>En développement</p></div>;
+const ModificationPage = () => <div className="page-container"><h2>Modifier un enseignant</h2><p>En développement</p></div>;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    const savedLoginState = localStorage.getItem('isLogged');
+    if (savedLoginState === 'true' && savedUser) {
+      setIsLogged(true);
+      setUser(JSON.parse(savedUser));
+    }
+    setLoading(false);
+  }, []);
+
+  const handleLogin = (loggedIn, userData) => {
+    setIsLogged(loggedIn);
+    if (userData) {
+      setUser(userData);
+      localStorage.setItem('isLogged', 'true');
+      localStorage.setItem('user', JSON.stringify(userData));
+    } else {
+      localStorage.removeItem('isLogged');
+      localStorage.removeItem('user');
+    }
+  };
+
+  if (loading) return <div className="loading-screen">Chargement...</div>;
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <Router>
+      <div className="app">
+        {isLogged && <Navbar onLogout={() => handleLogin(false, null)} user={user} />}
+        <main className={`main-content ${!isLogged ? 'centered' : ''}`}>
+          <Routes>
+            <Route path="/" element={<LoginPage onLogin={handleLogin} />} />
+            {isLogged ? (
+              <>
+                <Route path="/accueil" element={<HomePage user={user} />} />
+                <Route path="/enseignant" element={<EnseignantPage />} />
+                <Route path="/ajout" element={<FormulairePage />} />
+                <Route path="/modification" element={<ModificationPage />} />
+                <Route path="/suppression" element={<SuppressionPage />} />
+                <Route path="/formulaire" element={<FormulairePage />} />
+                <Route path="*" element={<Navigate to="/accueil" replace />} />
+              </>
+            ) : (
+              <Route path="*" element={<Navigate to="/" replace />} />
+            )}
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

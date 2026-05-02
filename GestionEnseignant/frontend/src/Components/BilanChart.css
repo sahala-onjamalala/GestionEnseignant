@@ -1,0 +1,53 @@
+/* Components/BilanChart.css */
+.chart-container {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+  border: 1px solid #e0f2f1;
+}
+
+.chart-title {
+  color: #00838f;
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-tooltip {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0f2f1;
+}
+
+.tooltip-label {
+  color: #00838f;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tooltip-value {
+  color: #00acc1;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 16px;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+  }
+}

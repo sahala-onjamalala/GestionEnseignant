@@ -1,0 +1,238 @@
+/* components/Navbar.css */
+.navbar {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #e0f2f1;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+/* Brand / Logo */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #00838f;
+  transition: all 0.3s ease;
+}
+
+.brand-link:hover {
+  transform: translateY(-1px);
+}
+
+.brand-icon {
+  color: #00acc1;
+}
+
+.brand-text {
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #00838f 0%, #00acc1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navigation Links */
+.navbar-links {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #546e7a;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-icon {
+  color: #78909c;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: #e0f2f1;
+  color: #00838f;
+}
+
+.nav-link:hover .nav-icon {
+  color: #00acc1;
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
+  color: #006064;
+}
+
+.nav-link.active .nav-icon {
+  color: #00838f;
+}
+
+/* User Section */
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px;
+  background: #f5f5f5;
+  border-radius: 30px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #00acc1 0%, #00838f 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.user-name {
+  color: #37474f;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.user-badge {
+  background: #e0f2f1;
+  color: #00838f;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Logout Button */
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #ffcdd2;
+  border-radius: 8px;
+  color: #e53935;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background: #ffebee;
+  border-color: #ef9a9a;
+  transform: translateY(-1px);
+}
+
+.logout-button svg {
+  stroke: #e53935;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .navbar-container {
+    padding: 0 20px;
+  }
+  
+  .brand-text {
+    font-size: 14px;
+  }
+  
+  .nav-link span:not(.nav-icon) {
+    display: none;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+  }
+  
+  .user-name {
+    display: none;
+  }
+  
+  .logout-button span {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  
+  .navbar-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .navbar-user {
+    order: 2;
+  }
+  
+  .navbar-brand {
+    order: 1;
+  }
+  
+  .user-info {
+    padding: 5px 10px;
+  }
+  
+  .logout-button {
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-link {
+    padding: 6px 10px;
+  }
+  
+  .brand-text {
+    display: none;
+  }
+  
+  .logout-button svg {
+    margin: 0;
+  }
+}
